@@ -29,10 +29,10 @@ export const App = () => {
 
   return (
     <div className="App">
-      <TodoList title={[taskKey1]}
-                task={task[taskKey1]}
-                deleteTasksItem={deleteTasksItem}
-                key={taskKey1}/>
+      {/*<TodoList title={[taskKey1]}*/}
+      {/*          task={task[taskKey1]}*/}
+      {/*          deleteTasksItem={deleteTasksItem}*/}
+      {/*          key={taskKey1}/>*/}
 
       <TodoList title={'What to by'}
                 task={task[taskKey2]}
