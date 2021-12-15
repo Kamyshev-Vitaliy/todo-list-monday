@@ -8,6 +8,7 @@ export type TasksT1 = {
   isDone: boolean,
 }
 
+export type FilterType = 'All' | 'Active' | 'Completed';
 
 function App() {
   
@@ -29,11 +30,44 @@ function App() {
   const buttonDeleteTask = (id: number) => {
     setTask(task.filter((f) => f.id !== id))
   }
+  
+  const [filterTask, setFilterTask] = useState<FilterType>('All');
+ 
+  const callback = (flag: FilterType) => {
+    setFilterTask(flag)
+  }
+  
+  const filterStatusTask = (statusTask: FilterType) => {
+    // setFilterTask(statusTask)
+    // console.log(filterTask)
+    
+    switch (statusTask) {
+      case 'All':
+        return task;
+      case 'Active':
+        return task.filter((f) => !f.isDone)
+      case 'Completed':
+        return task.filter((f) => f.isDone);
+      default:
+        return task;
+    }
+    
+  }
+  
+  let newStatusTask = filterStatusTask(filterTask);
+  
+  // if (filterTask === 'Active') {
+  //   newStatusTask = task.filter((f) => !f.isDone);
+  // } else if (filterTask === 'Completed') {
+  //   newStatusTask = task.filter((f) => f.isDone)
+  // }
+  
   return (
     <div className="App">
       <TodoList title={'What to learn'}
-                tasks={task}
+                tasks={newStatusTask}
                 buttonDeleteTask={buttonDeleteTask}
+                setFilterTask={setFilterTask}
       />
       {/*<TodoList title={'What to by'}*/}
       {/*          tasks={tasksT2}*/}
