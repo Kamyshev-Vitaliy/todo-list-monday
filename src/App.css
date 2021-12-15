@@ -6,3 +6,11 @@
 .App > div {
   margin-right: 50px;
 }
+.App {
+  padding: 30px;
+  display: flex;
+}
+
+.App > div {
+  margin-right: 50px;
+}

@@ -1,40 +1,48 @@
 import React, {FC} from 'react';
 
-type TasksPropsType = {
-  id: number,
-  title: string,
-  isDone: boolean,
-}
+import {TasksT1} from "../App";
+import {Buttons} from "./Buttons/Buttons";
 
 type TodoListPropsType = {
-  title: string
-  task: Array<TasksPropsType>
-  deleteTasksItem: (id: number) => void
+  title: string,
+  tasks: Array<TasksT1>
+  buttonDeleteTask: (id: number) => void
 }
 
-export const TodoList: FC<TodoListPropsType> = ({title, task, deleteTasksItem}) => {
+export const TodoList: FC<TodoListPropsType> = ({title, tasks, buttonDeleteTask}) => {
+  
+  
   return (
     <div>
       <h3>{title}</h3>
+      
       <div>
         <input/>
         <button>+</button>
       </div>
+      
       <ul>
-        {
-          task.map((t) =>
+        
+        {tasks.map((t) => {
+          return (
             <li key={t.id}>
-              <input type="checkbox" checked={t.isDone}/><span>{t.title}</span>
-              <button onClick={() => deleteTasksItem(t.id)}>X</button>
-            </li>)
-        }
+              <input type="checkbox" checked={t.isDone}/>
+              <span>{t.title}</span>
+              <button onClick={() => buttonDeleteTask(t.id)}>X
+              </button>
+            </li>
+          )
+        })}
+      
       </ul>
+      
       <div>
-        <button>All</button>
-        <button>Active</button>
-        <button>Completed</button>
+        <Buttons/>
+        {/*<button>All</button>*/}
+        {/*<button>Active</button>*/}
+        {/*<button>Completed</button>*/}
       </div>
+    
     </div>
   );
 }
-
