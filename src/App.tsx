@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {v1} from 'uuid';
 import './App.css';
 import {Todolist} from './Todolist';
 
@@ -7,15 +8,15 @@ export type FilterTaskType = 'All' | 'Active' | 'Completed';
 export const App = () => {
 
   const [task, setTask] = useState([
-    {id: 1, title: "HTML&CSS", isDone: true},
-    {id: 2, title: "JS", isDone: true},
-    {id: 3, title: "ReactJS", isDone: false},
-    {id: 4, title: "Redux", isDone: false}
+    {id: v1(), title: "HTML&CSS", isDone: true},
+    {id: v1(), title: "JS", isDone: true},
+    {id: v1(), title: "ReactJS", isDone: false},
+    {id: v1(), title: "Redux", isDone: false}
   ])
 
   const [filter, setFilter] = useState<FilterTaskType>('All');
 
-  let newReturnStatusTask;//Создаем копию для обработки тасок с поступающим типом
+  let newReturnStatusTask;
 
   switch (filter) {
     case 'Active':
@@ -40,12 +41,14 @@ export const App = () => {
   // ]
 
 
-  const removeTaskItemCallback = (mId: number) => {
+  const removeTaskItemCallback = (mId: string) => {
     setTask(task.filter((f) => f.id !== mId))
   }
-
   const filterTaskTypeCallBack = (statusTask: FilterTaskType) => {
     setFilter(statusTask)
+  }
+  const addTask = (inputTask:string) => {
+    setTask([{id: v1(), title: inputTask, isDone: false}, ...task]);
   }
 
 
@@ -55,6 +58,7 @@ export const App = () => {
                 tasks={newReturnStatusTask}
                 removeTaskItemCallback={removeTaskItemCallback}
                 filterTaskTypeCallBack={filterTaskTypeCallBack}
+                addTask={addTask}
       />
       {/*<Todolist title="What to by" tasks={tasks2}*/}
       {/*          removeTaskItem={removeTaskItem}/>*/}
