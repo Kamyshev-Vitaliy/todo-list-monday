@@ -39,7 +39,13 @@ export const Todolist: FC<PropsTypeTodoList> = ({
     }
   }
 
+  const removeTask = (taskItem:string) => {
+    removeTaskItemCallback(taskItem)
+  }
 
+  const filterButtonType = (statusTask: FilterTaskType) => {
+    filterTaskTypeCallBack(statusTask);
+  }
 
   return <div>
     <h3>{title}</h3>
@@ -55,16 +61,16 @@ export const Todolist: FC<PropsTypeTodoList> = ({
           <li key={m.id}>
             <input type='checkbox' checked={m.isDone}/>
             <span>{m.title}</span>
-            <button onClick={() => removeTaskItemCallback(m.id)}>X</button>
+            <button onClick={() => removeTask(m.id)}>X</button>
           </li>
         )
       })}
     </ul>
 
     <div>
-      <button onClick={() => filterTaskTypeCallBack('All')}>All</button>
-      <button onClick={() => filterTaskTypeCallBack('Active')}>Active</button>
-      <button onClick={() => filterTaskTypeCallBack('Completed')}>Completed</button>
+      <button onClick={() => filterButtonType('All')}>All</button>
+      <button onClick={() => filterButtonType('Active')}>Active</button>
+      <button onClick={() => filterButtonType('Completed')}>Completed</button>
     </div>
   </div>
 }
