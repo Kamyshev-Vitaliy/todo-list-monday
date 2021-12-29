@@ -39,9 +39,9 @@ export const Todolist: FC<PropsTypeTodoList> = ({
     }
   }
 
-  const removeTask = (taskItem:string) => {
-    removeTaskItemCallback(taskItem)
-  }
+  // const removeTask = (taskItem:string) => {
+  //   removeTaskItemCallback(taskItem);
+  // }
 
   const filterButtonType = (statusTask: FilterTaskType) => {
     filterTaskTypeCallBack(statusTask);
@@ -57,11 +57,14 @@ export const Todolist: FC<PropsTypeTodoList> = ({
 
     <ul>
       {tasks.map((m) => {
+        const removeTask = () => {
+          removeTaskItemCallback(m.id);
+        }
         return (
           <li key={m.id}>
             <input type='checkbox' checked={m.isDone}/>
             <span>{m.title}</span>
-            <button onClick={() => removeTask(m.id)}>X</button>
+            <button onClick={removeTask}>X</button>
           </li>
         )
       })}
