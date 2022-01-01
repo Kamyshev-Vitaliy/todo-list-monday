@@ -1,0 +1,15 @@
+.error{
+    border: #ff0000 1px solid;
+}
+
+.error_message{
+    color: #ff0000;
+}
+
+.active_filter {
+    background-color: #33CCFF;
+}
+
+.isDone{
+    opacity: 0.5;
+}

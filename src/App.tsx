@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {v1} from 'uuid';
 import './App.css';
 import {Todolist} from './Todolist';
 
 export type FilterTaskType = 'All' | 'Active' | 'Completed';
 
-export const App = () => {
+export const App: FC = () => {
 
   const [task, setTask] = useState([
     {id: v1(), title: "HTML&CSS", isDone: true},
@@ -47,10 +47,13 @@ export const App = () => {
   const filterTaskTypeCallBack = (statusTask: FilterTaskType) => {
     setFilter(statusTask)
   }
-  const addTask = (inputTask:string) => {
+  const addTask = (inputTask: string) => {
     setTask([{id: v1(), title: inputTask, isDone: false}, ...task]);
   }
 
+  const taskStatusCheck = (taskID: string, taskStatus: boolean) => {
+    setTask(task.map(m => m.id === taskID ? {...m, isDone: taskStatus} : m))
+  }
 
   return (
     <div className="App">
@@ -59,6 +62,8 @@ export const App = () => {
                 removeTaskItemCallback={removeTaskItemCallback}
                 filterTaskTypeCallBack={filterTaskTypeCallBack}
                 addTask={addTask}
+                taskStatusCheck={taskStatusCheck}
+                filter={filter}
       />
       {/*<Todolist title="What to by" tasks={tasks2}*/}
       {/*          removeTaskItem={removeTaskItem}/>*/}
